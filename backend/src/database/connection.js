@@ -10,6 +10,10 @@ const pool = new Pool({
   user: env.DB_USER,
   password: env.DB_PASSWORD,
 
+  ssl: {
+  rejectUnauthorized: false,
+},
+  
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
