@@ -3,6 +3,8 @@ import env from "../config/env.js";
 
 const { Pool } = pkg;
 
+const useSSL = env.DB_HOST !== "localhost";
+
 const pool = new Pool({
   host: env.DB_HOST,
   port: env.DB_PORT,
@@ -10,7 +12,7 @@ const pool = new Pool({
   user: env.DB_USER,
   password: env.DB_PASSWORD,
 
-  ssl: env.DB_SSL === "true" ? { rejectUnauthorized: false } : false,
+  ssl: useSSL ? { rejectUnauthorized: false } : false,
 
   max: 20,
   idleTimeoutMillis: 30000,
