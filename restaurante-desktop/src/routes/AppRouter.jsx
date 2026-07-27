@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
@@ -24,7 +24,7 @@ import Mesero from "../pages/Mesero/Mesero";
 
 function AppRouter() {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
 
                 <Route path="/" element={<Home />} />
@@ -54,7 +54,7 @@ function AppRouter() {
 <Route path="/caja/combos" element={<CombosCaja />} />
 
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 
