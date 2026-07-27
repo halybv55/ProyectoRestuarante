@@ -1,13 +1,12 @@
 import { forwardRef, useId } from "react";
 
-const Input = forwardRef(function Input(
+const Textarea = forwardRef(function Textarea(
   {
     id,
     label,
     error,
     helperText,
     required = false,
-    icon,
     className = "",
     "aria-describedby": ariaDescribedBy,
     ...props
@@ -15,24 +14,18 @@ const Input = forwardRef(function Input(
   ref,
 ) {
   const generatedId = useId();
-  const inputId = id || generatedId;
-  const messageId = `${inputId}-message`;
+  const textareaId = id || generatedId;
+  const messageId = `${textareaId}-message`;
   const describedBy =
     [ariaDescribedBy, error || helperText ? messageId : null]
       .filter(Boolean)
       .join(" ") || undefined;
-  const inputClasses = [
-    "rs-input",
-    icon ? "rs-input--with-icon" : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const classes = ["rs-textarea", className].filter(Boolean).join(" ");
 
   return (
     <div className="rs-field">
       {label && (
-        <label className="rs-field__label" htmlFor={inputId}>
+        <label className="rs-field__label" htmlFor={textareaId}>
           {label}
           {required && (
             <span className="rs-field__required" aria-hidden="true">
@@ -41,22 +34,15 @@ const Input = forwardRef(function Input(
           )}
         </label>
       )}
-      <div className="rs-field__control">
-        {icon && (
-          <span className="rs-field__icon" aria-hidden="true">
-            {icon}
-          </span>
-        )}
-        <input
-          ref={ref}
-          id={inputId}
-          className={inputClasses}
-          required={required}
-          aria-invalid={error ? "true" : undefined}
-          aria-describedby={describedBy}
-          {...props}
-        />
-      </div>
+      <textarea
+        ref={ref}
+        id={textareaId}
+        className={classes}
+        required={required}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={describedBy}
+        {...props}
+      />
       {(error || helperText) && (
         <p
           id={messageId}
@@ -69,4 +55,4 @@ const Input = forwardRef(function Input(
   );
 });
 
-export default Input;
+export default Textarea;

@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
-
+import { MdDelete, MdEdit, MdRestaurantMenu, MdSave } from "react-icons/md";
 import {
   getPlatos,
   createPlato,
   updatePlato,
   deletePlato,
 } from "../../api/plato.api";
-
 import { getCategorias } from "../../api/categoria.api";
+import Button from "../../components/Button";
+import Card from "../../components/Card";
+import EmptyState from "../../components/EmptyState";
+import Input from "../../components/Input";
+import PageHeader from "../../components/PageHeader";
+import Select from "../../components/Select";
+import Table from "../../components/Table";
 
 function Platos() {
   const [platos, setPlatos] = useState([]);
@@ -20,11 +26,6 @@ function Platos() {
 
   const [editando, setEditando] = useState(false);
   const [idEditar, setIdEditar] = useState(null);
-
-  useEffect(() => {
-    cargarPlatos();
-    cargarCategorias();
-  }, []);
 
   const cargarPlatos = async () => {
     try {
@@ -45,6 +46,13 @@ function Platos() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    // Preserve the existing initial API loads.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    cargarPlatos();
+    cargarCategorias();
+  }, []);
 
   const limpiar = () => {
     setNombre("");
@@ -118,142 +126,145 @@ function Platos() {
     }
   };
 
-    return (
-    <div>
+  const enviarFormulario = (event) => {
+    event.preventDefault();
+    if (editando) {
+      actualizarPlato();
+    } else {
+      guardarPlato();
+    }
+  };
 
-      <h2>Platos</h2>
-
-      <hr />
-
-      <h3>{editando ? "Editar Plato" : "Nuevo Plato"}</h3>
-
-      <input
-        type="text"
-        placeholder="Nombre"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
+  return (
+    <div className="rs-admin-page">
+      <PageHeader
+        title="Platos"
+        description="Administra la oferta de platos y su clasificación."
       />
 
-      <br />
-      <br />
-
-      <input
-        type="text"
-        placeholder="Descripción"
-        value={descripcion}
-        onChange={(e) => setDescripcion(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <input
-        type="number"
-        placeholder="Precio"
-        value={precio}
-        onChange={(e) => setPrecio(e.target.value)}
-      />
-
-      <br />
-      <br />
-
-      <select
-        value={idcategoria}
-        onChange={(e) => setIdCategoria(e.target.value)}
-      >
-        <option value="">Seleccione una categoría</option>
-
-        {categorias.map((categoria) => (
-          <option
-            key={categoria.idcategoria}
-            value={categoria.idcategoria}
+      <div className="rs-admin-work-area">
+        <Card
+          title={editando ? "Editar plato" : "Nuevo plato"}
+          subtitle={
+            editando
+              ? "Actualiza los datos del plato seleccionado."
+              : "Completa la información del nuevo plato."
+          }
+        >
+          <form
+            className="rs-admin-form"
+            onSubmit={enviarFormulario}
+            noValidate
           >
-            {categoria.nombre}
-          </option>
-        ))}
+            <div className="rs-admin-form__grid rs-admin-form__grid--2">
+              <Input
+                type="text"
+                label="Nombre"
+                placeholder="Nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
 
-      </select>
+              <Input
+                type="number"
+                label="Precio"
+                placeholder="Precio"
+                value={precio}
+                onChange={(e) => setPrecio(e.target.value)}
+              />
 
-      <br />
-      <br />
+              <Input
+                type="text"
+                label="Descripción"
+                placeholder="Descripción"
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+              />
 
-      {editando ? (
-        <button onClick={actualizarPlato}>
-          Actualizar
-        </button>
-      ) : (
-        <button onClick={guardarPlato}>
-          Guardar
-        </button>
-      )}
+              <Select
+                label="Categoría"
+                value={idcategoria}
+                onChange={(e) => setIdCategoria(e.target.value)}
+              >
+                <option value="">Seleccione una categoría</option>
+                {categorias.map((categoria) => (
+                  <option
+                    key={categoria.idcategoria}
+                    value={categoria.idcategoria}
+                  >
+                    {categoria.nombre}
+                  </option>
+                ))}
+              </Select>
+            </div>
 
-      <button onClick={limpiar}>
-        Cancelar
-      </button>
+            <div className="rs-admin-form__actions">
+              <Button type="submit" icon={<MdSave />}>
+                {editando ? "Actualizar" : "Guardar"}
+              </Button>
+              <Button type="button" variant="secondary" onClick={limpiar}>
+                Cancelar
+              </Button>
+            </div>
+          </form>
+        </Card>
 
-      <hr />
-
-      <table border="1">
-
-        <thead>
-
-          <tr>
-
-            <th>Nombre</th>
-
-            <th>Descripción</th>
-
-            <th>Precio</th>
-
-            <th>Categoría</th>
-
-            <th>Acciones</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          {platos.map((plato) => (
-
-            <tr key={plato.idplato}>
-
-              <td>{plato.nombre}</td>
-
-              <td>{plato.descripcion}</td>
-
-              <td>{plato.precio}</td>
-
-              <td>{plato.categoria.nombre}</td>
-
-              <td>
-
-                <button
-                  onClick={() => editarPlato(plato)}
-                >
-                  Editar
-                </button>
-
-                <button
-                  onClick={() => eliminarPlato(plato.idplato)}
-                >
-                  Eliminar
-                </button>
-
-              </td>
-
-            </tr>
-
-          ))}
-
-        </tbody>
-
-      </table>
-
+        <Card
+          title="Platos registrados"
+          subtitle="Oferta disponible para la operación del restaurante."
+          className={platos.length === 0 ? "rs-admin-empty-card" : ""}
+        >
+          {platos.length === 0 ? (
+            <EmptyState
+              icon={<MdRestaurantMenu />}
+              title="No hay platos registrados"
+              message="Los platos creados aparecerán en este listado."
+            />
+          ) : (
+            <Table className="rs-admin-table rs-admin-table--medium">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Categoría</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {platos.map((plato) => (
+                  <tr key={plato.idplato}>
+                    <td>{plato.nombre}</td>
+                    <td>{plato.descripcion}</td>
+                    <td className="rs-admin-cell--numeric">{plato.precio}</td>
+                    <td>{plato.categoria.nombre}</td>
+                    <td>
+                      <div className="rs-admin-row-actions">
+                        <Button
+                          variant="secondary"
+                          icon={<MdEdit />}
+                          onClick={() => editarPlato(plato)}
+                        >
+                          Editar
+                        </Button>
+                        <Button
+                          variant="danger"
+                          icon={<MdDelete />}
+                          onClick={() => eliminarPlato(plato.idplato)}
+                        >
+                          Eliminar
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </Card>
+      </div>
     </div>
   );
-
 }
 
 export default Platos;

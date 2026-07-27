@@ -1,38 +1,32 @@
 import { forwardRef, useId } from "react";
 
-const Input = forwardRef(function Input(
+const Select = forwardRef(function Select(
   {
     id,
     label,
     error,
     helperText,
     required = false,
-    icon,
     className = "",
+    children,
     "aria-describedby": ariaDescribedBy,
     ...props
   },
   ref,
 ) {
   const generatedId = useId();
-  const inputId = id || generatedId;
-  const messageId = `${inputId}-message`;
+  const selectId = id || generatedId;
+  const messageId = `${selectId}-message`;
   const describedBy =
     [ariaDescribedBy, error || helperText ? messageId : null]
       .filter(Boolean)
       .join(" ") || undefined;
-  const inputClasses = [
-    "rs-input",
-    icon ? "rs-input--with-icon" : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const classes = ["rs-select", className].filter(Boolean).join(" ");
 
   return (
     <div className="rs-field">
       {label && (
-        <label className="rs-field__label" htmlFor={inputId}>
+        <label className="rs-field__label" htmlFor={selectId}>
           {label}
           {required && (
             <span className="rs-field__required" aria-hidden="true">
@@ -41,22 +35,17 @@ const Input = forwardRef(function Input(
           )}
         </label>
       )}
-      <div className="rs-field__control">
-        {icon && (
-          <span className="rs-field__icon" aria-hidden="true">
-            {icon}
-          </span>
-        )}
-        <input
-          ref={ref}
-          id={inputId}
-          className={inputClasses}
-          required={required}
-          aria-invalid={error ? "true" : undefined}
-          aria-describedby={describedBy}
-          {...props}
-        />
-      </div>
+      <select
+        ref={ref}
+        id={selectId}
+        className={classes}
+        required={required}
+        aria-invalid={error ? "true" : undefined}
+        aria-describedby={describedBy}
+        {...props}
+      >
+        {children}
+      </select>
       {(error || helperText) && (
         <p
           id={messageId}
@@ -69,4 +58,4 @@ const Input = forwardRef(function Input(
   );
 });
 
-export default Input;
+export default Select;
