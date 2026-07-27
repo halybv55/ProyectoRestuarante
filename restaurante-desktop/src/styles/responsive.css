@@ -93,6 +93,11 @@
     flex: 1 1 auto;
   }
 
+  .rs-card__actions > .rs-badge,
+  .rs-page-header__actions > .rs-badge {
+    flex: 0 0 auto;
+  }
+
   .rs-table th,
   .rs-table td {
     padding-inline: var(--rs-space-3);
