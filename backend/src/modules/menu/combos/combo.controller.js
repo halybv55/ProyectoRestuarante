@@ -9,3 +9,19 @@ export const create = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAll = async (req, res, next) => {
+  try {
+    return res.json(await service.getAll());
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getDetalle = async (req, res, next) => {
+  try {
+    return res.json(await service.getDetalle(req.params.id));
+  } catch (error) {
+    next(error);
+  }
+};

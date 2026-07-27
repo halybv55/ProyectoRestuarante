@@ -93,3 +93,63 @@ export const getDetalleCombo = async (id) => {
 
   return rows;
 };
+export const getAll = async () => {
+  const query = `
+    SELECT
+      idcombo,
+      nombre,
+      descripcion,
+      precio
+    FROM combo
+    WHERE activo = true
+      AND idmenu = (
+        SELECT idmenu
+        FROM menu_dia
+        WHERE estado = 'ACTIVO'
+        LIMIT 1
+      )
+    ORDER BY nombre;
+  `;
+
+  const { rows } = await pool.query(query);
+
+  return rows;
+};
+export const getDetalle = async (id) => {
+  const query = `
+    SELECT
+      c.idcombo,
+      c.nombre,
+      c.descripcion,
+      c.precio,
+
+      json_agg(
+        json_build_object(
+          'idPlato', p.idplato,
+          'nombre', p.nombre,
+          'cantidad', dc.cantidad
+        )
+      ) AS platos
+
+    FROM combo c
+
+    INNER JOIN detallecombo dc
+      ON dc.idcombo = c.idcombo
+
+    INNER JOIN plato p
+      ON p.idplato = dc.idplato
+
+    WHERE c.idcombo = $1
+      AND c.activo = true
+
+    GROUP BY
+      c.idcombo,
+      c.nombre,
+      c.descripcion,
+      c.precio;
+  `;
+
+  const { rows } = await pool.query(query, [id]);
+
+  return rows[0];
+};

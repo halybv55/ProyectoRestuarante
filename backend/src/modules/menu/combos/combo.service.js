@@ -15,3 +15,16 @@ export const create = async (data) => {
 
   return await repository.create(data);
 };
+export const getAll = async () => {
+  return await repository.getAll();
+};
+
+export const getDetalle = async (id) => {
+  const combo = await repository.getDetalle(id);
+
+  if (!combo) {
+    throw new Error("Combo no encontrado.");
+  }
+
+  return combo;
+};
