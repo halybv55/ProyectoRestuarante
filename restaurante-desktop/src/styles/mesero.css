@@ -1,0 +1,117 @@
+.rs-waiter-shell {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100dvh;
+  min-width: 0;
+  flex-direction: column;
+  background: var(--rs-color-background);
+}
+
+.rs-waiter-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--rs-z-sticky);
+  display: flex;
+  min-width: 0;
+  min-height: calc(var(--rs-navbar-height) + env(safe-area-inset-top));
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rs-space-2);
+  padding:
+    calc(var(--rs-space-2) + env(safe-area-inset-top))
+    var(--rs-space-3)
+    var(--rs-space-2);
+  border-bottom: var(--rs-border-width) solid var(--rs-color-border);
+  background: var(--rs-color-surface);
+  box-shadow: var(--rs-shadow-sm);
+}
+
+.rs-waiter-brand {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--rs-space-2);
+}
+
+.rs-waiter-brand__mark {
+  display: inline-grid;
+  width: var(--rs-touch-target);
+  height: var(--rs-touch-target);
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: var(--rs-radius-md);
+  background: var(--rs-color-info);
+  color: var(--rs-color-surface);
+  font-size: var(--rs-font-size-xl);
+}
+
+.rs-waiter-brand__copy {
+  display: grid;
+  min-width: 0;
+}
+
+.rs-waiter-brand__copy strong,
+.rs-waiter-brand__copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rs-waiter-brand__copy small {
+  color: var(--rs-color-text-secondary);
+  font-size: var(--rs-font-size-xs);
+}
+
+.rs-waiter-header__logout {
+  flex: 0 0 auto;
+}
+
+.rs-waiter-content {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  flex: 1;
+}
+
+.rs-waiter-content__inner {
+  width: min(100%, 72rem);
+  min-width: 0;
+  max-width: 100%;
+  margin-inline: auto;
+  padding:
+    var(--rs-space-4)
+    var(--rs-space-4)
+    calc(var(--rs-space-6) + env(safe-area-inset-bottom));
+}
+
+.rs-waiter-page {
+  display: grid;
+  min-width: 0;
+  max-width: 100%;
+  gap: var(--rs-space-5);
+}
+
+.rs-waiter-empty-card .rs-card__body {
+  padding: 0;
+}
+
+@media (min-width: 48rem) {
+  .rs-waiter-header {
+    padding-inline: var(--rs-space-6);
+  }
+
+  .rs-waiter-content__inner {
+    padding:
+      var(--rs-space-6)
+      var(--rs-space-6)
+      calc(var(--rs-space-8) + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 23rem) {
+  .rs-waiter-header__logout {
+    padding-inline: var(--rs-space-2);
+  }
+}
