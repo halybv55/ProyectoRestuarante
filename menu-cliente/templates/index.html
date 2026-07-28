@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Restaurante HalyBV</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>🍽 Restaurante HalyBV</h1>
+
+    <p>Disfruta nuestro menú del día.</p>
+
+    <a href="#menu" class="btn">
+        Ver menú
+    </a>
+
+</header>
+
+<div class="contenedor" id="menu">
+
+<h2>🍛 Platos</h2>
+
+<div class="cards">
+
+{% for plato in platos %}
+
+<div class="card">
+
+<h3>{{ plato.nombre }}</h3>
+
+<p>{{ plato.descripcion }}</p>
+
+<div class="precio">
+
+Bs {{ plato.precio }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<h2>🥤 Bebidas</h2>
+
+<div class="cards">
+
+{% for bebida in bebidas %}
+
+<div class="card">
+
+<h3>{{ bebida.nombre }}</h3>
+
+<p>{{ bebida.tipo_bebida }}</p>
+
+<div class="precio">
+
+Bs {{ bebida.precio }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% if combos %}
+
+<h2>🎁 Combos</h2>
+
+<div class="cards">
+
+{% for combo in combos %}
+
+<div class="card">
+
+<h3>{{ combo.nombre }}</h3>
+
+<p>{{ combo.descripcion }}</p>
+
+<div class="precio">
+
+Bs {{ combo.precio }}
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+<button id="chatButton">
+
+🤖
+
+</button>
+
+<div id="chatBox">
+
+    <div class="chat-header">
+        🤖 Asistente HalyBV
+    </div>
+
+    <div id="mensajes" class="chat-body">
+
+        <div class="ia">
+            ¡Hola! 👋
+
+            Pregúntame cualquier cosa sobre el menú.
+        </div>
+
+    </div>
+
+    <div class="chat-footer">
+
+        <input
+            type="text"
+            id="pregunta"
+            placeholder="Escribe tu pregunta..."
+        >
+
+        <button id="enviar">
+            Enviar
+        </button>
+
+    </div>
+
+</div>
+
+</div>
+
+<script>
+
+const boton=document.getElementById("chatButton");
+
+const chat=document.getElementById("chatBox");
+
+boton.onclick=()=>{
+
+    chat.classList.toggle("mostrar");
+
+}
+
+
+const enviar=document.getElementById("enviar");
+
+const input=document.getElementById("pregunta");
+
+const mensajes=document.getElementById("mensajes");
+
+
+enviar.onclick=async()=>{
+
+    const pregunta=input.value.trim();
+
+    if(pregunta==="") return;
+
+
+    mensajes.innerHTML+=`
+
+    <div class="usuario">
+
+        ${pregunta}
+
+    </div>
+
+    `;
+
+
+    input.value="";
+
+
+    const respuesta=await fetch("/preguntar",{
+
+        method:"POST",
+
+        headers:{
+
+            "Content-Type":"application/json"
+
+        },
+
+        body:JSON.stringify({
+
+            pregunta
+
+        })
+
+    });
+
+
+    const datos=await respuesta.json();
+
+
+    mensajes.innerHTML+=`
+
+    <div class="ia">
+
+        ${datos.respuesta}
+
+    </div>
+
+    `;
+
+
+    mensajes.scrollTop=mensajes.scrollHeight;
+
+}
+
+</script>
+
+</body>
+
+</html>
