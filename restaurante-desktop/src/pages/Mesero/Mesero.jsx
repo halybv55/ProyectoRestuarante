@@ -1,38 +1,38 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MdDoneAll, MdReceiptLong } from "react-icons/md";
-import {
-    getListos,
-    entregarPedido
-} from "../../api/mesero.api";
+import { cambiarEstado } from "../../api/cocina.api";
 import Button from "../../components/Button";
 import Card from "../../components/Card";
 import EmptyState from "../../components/EmptyState";
 import PageHeader from "../../components/PageHeader";
 import OrderTicket from "../../components/operacion/OrderTicket";
 import MeseroLayout from "../../layouts/MeseroLayout";
+import { getOrderDetailsByState } from "../../utils/orderWorkflow";
 
 function Mesero() {
     const [pedidos, setPedidos] = useState([]);
 
-    const cargarPedidos = async () => {
+    const cargarPedidos = useCallback(async () => {
         try {
-            const response = await getListos();
-
-            setPedidos(response.data);
+            const pedidosListos = await getOrderDetailsByState(["LISTO"]);
+            setPedidos(pedidosListos);
         } catch (error) {
             console.log(error);
         }
-    };
+    }, []);
 
     useEffect(() => {
-        // Conserva la carga inicial existente sin añadir polling.
+        // La consulta inicial y el intervalo sincronizan la cola de entrega.
         // eslint-disable-next-line react-hooks/set-state-in-effect
         cargarPedidos();
-    }, []);
+        const refreshInterval = window.setInterval(cargarPedidos, 8000);
+
+        return () => window.clearInterval(refreshInterval);
+    }, [cargarPedidos]);
 
     const entregar = async (idDetalle) => {
         try {
-            await entregarPedido(idDetalle);
+            await cambiarEstado(idDetalle, 5);
 
             cargarPedidos();
         } catch (error) {

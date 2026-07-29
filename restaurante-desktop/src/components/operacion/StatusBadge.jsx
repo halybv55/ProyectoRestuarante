@@ -2,9 +2,11 @@ import Badge from "../Badge";
 
 const statusVariants = {
     PENDIENTE: "warning",
+    PREPARANDO: "info",
     "En preparación": "info",
     LISTO: "success",
     Listo: "success",
+    PARCIAL: "warning",
     ENTREGADO: "neutral",
     Entregado: "neutral"
 };

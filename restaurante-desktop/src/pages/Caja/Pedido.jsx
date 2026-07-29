@@ -19,9 +19,11 @@ import PageHeader from "../../components/PageHeader";
 import Select from "../../components/Select";
 import Input from "../../components/Input";
 import ProductCard from "../../components/caja/ProductCard";
+import { useAuth } from "../../context/AuthContext";
 import CajaLayout from "../../layouts/CajaLayout";
 
 function Pedido() {
+    const { usuario } = useAuth();
     const [menu, setMenu] = useState(null);
 
     // AQUÍ IRÁN LOS PLATOS Y COMBOS DEL MENÚ
@@ -113,15 +115,20 @@ function Pedido() {
 
         if (!cantidad || cantidad <= 0) return;
 
+        const tipo = String(producto.tipo ?? "PLATO").toUpperCase();
+        const idProducto =
+            tipo === "COMBO"
+                ? producto.idcombo
+                : producto.idplato;
+
+        if (!idProducto) return;
+
         setDetalle((actual) => [
             ...actual,
             {
-                tipo: producto.tipo || "PLATO",
+                tipo,
 
-                idProducto:
-                    producto.iddetalle_menu ??
-                    producto.idplato ??
-                    producto.idcombo,
+                idProducto,
 
                 nombre: producto.nombre,
 
@@ -190,6 +197,12 @@ function Pedido() {
             return;
         }
 
+        if (!usuario?.id) {
+            alert("No se pudo identificar al usuario de Caja.");
+
+            return;
+        }
+
         try {
             const pedido = {
                 tipoPedido,
@@ -199,7 +212,7 @@ function Pedido() {
                         ? Number(mesa)
                         : null,
 
-                idUsuario: 1,
+                idUsuario: usuario.id,
 
                 platos: detalle
                     .filter(item => item.tipo === "PLATO")

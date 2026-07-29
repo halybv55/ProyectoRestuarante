@@ -53,13 +53,13 @@ function Home() {
                     <button
                         type="button"
                         className="rs-role-card rs-role-card--cashier"
-                        onClick={() => navigate("/login/Cajera")}
+                        onClick={() => navigate("/login/Cajero")}
                     >
                         <span className="rs-role-card__icon" aria-hidden="true">
                             <MdPointOfSale />
                         </span>
                         <span className="rs-role-card__content">
-                            <strong>Cajera</strong>
+                            <strong>Cajero</strong>
                             <small>Pedidos, cobros y ventas</small>
                         </span>
                         <MdArrowForward
@@ -71,13 +71,13 @@ function Home() {
                     <button
                         type="button"
                         className="rs-role-card rs-role-card--kitchen"
-                        onClick={() => navigate("/login/Cocinera")}
+                        onClick={() => navigate("/login/Cocinero")}
                     >
                         <span className="rs-role-card__icon" aria-hidden="true">
                             <MdOutlineRestaurant />
                         </span>
                         <span className="rs-role-card__content">
-                            <strong>Cocinera</strong>
+                            <strong>Cocinero</strong>
                             <small>Preparación y estado de comandas</small>
                         </span>
                         <MdArrowForward

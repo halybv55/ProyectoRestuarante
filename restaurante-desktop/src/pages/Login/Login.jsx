@@ -39,7 +39,9 @@ function Login() {
             const equivalencias = {
                 Administrador: "Administrador",
                 Cajera: "Cajero",
+                Cajero: "Cajero",
                 Cocinera: "Cocinero",
+                Cocinero: "Cocinero",
                 Mesero: "Mesero",
             };
 
@@ -57,11 +59,9 @@ function Login() {
                 case "Administrador":
                     navigate("/admin");
                     break;
-
                 case "Cajero":
                     navigate("/caja");
                     break;
-
                 case "Cocinero":
                     navigate("/cocina");
                     break;
