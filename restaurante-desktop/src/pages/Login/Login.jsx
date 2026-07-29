@@ -44,10 +44,10 @@ function Login() {
                 case "Administrador":
                     navigate("/admin");
                     break;
-                case "Cajera":
+                case "Cajero":
                     navigate("/caja");
                     break;
-                case "Cocinera":
+                case "Cocinero":
                     navigate("/cocina");
                     break;
                 case "Mesero":

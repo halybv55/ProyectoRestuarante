@@ -1,0 +1,7 @@
+flowchart LR
+  APP[Express + pg] -->|Pool / SSL condicional| PG[(PostgreSQL 17.5)]
+  PG --> T[22 tablas]
+  PG --> I[14 índices explícitos]
+  PG --> V[5 vistas]
+  PG --> C[PK, FK, UNIQUE, CHECK]
+  PG --> X[pgcrypto / UUID]

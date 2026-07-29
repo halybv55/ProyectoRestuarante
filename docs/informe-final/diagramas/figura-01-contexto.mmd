@@ -1,0 +1,12 @@
+flowchart LR
+  A[Administrador] --> R[React / Electron]
+  C[Cajero] --> R
+  K[Cocinero] --> R
+  M[Mesero] --> R
+  CL[Cliente] --> F[Flask menu-cliente]
+  R -->|JSON HTTPS| API[API Express]
+  F -->|JSON HTTPS| API
+  F -->|Prompt| G[Gemini]
+  API -->|SQL SSL| DB[(PostgreSQL)]
+  API -->|Eventos| S[Socket.IO]
+  R -. preparación .-> CAP[Capacitor]

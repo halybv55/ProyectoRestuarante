@@ -1,0 +1,13 @@
+classDiagram
+  class Controller
+  class Service
+  class Repository
+  class Usuario
+  class Pedido
+  class DetallePedido
+  class Venta
+  Controller --> Service
+  Service --> Repository
+  Usuario "1" --> "*" Pedido
+  Pedido "1" *-- "*" DetallePedido
+  Pedido "1" --> "0..1" Venta

@@ -1,0 +1,12 @@
+classDiagram
+  class usuarioEjemplo { rol = Cajero }
+  class mesaEjemplo { numero = referencial }
+  class pedidoEjemplo { tipo = RESTAURANTE }
+  class detalleEjemplo { cantidad = 1 }
+  class estadoEjemplo { nombre = referencial }
+  class ventaEjemplo { descuento = 0 }
+  usuarioEjemplo --> pedidoEjemplo
+  mesaEjemplo --> pedidoEjemplo
+  pedidoEjemplo --> detalleEjemplo
+  detalleEjemplo --> estadoEjemplo
+  pedidoEjemplo --> ventaEjemplo

@@ -1,0 +1,10 @@
+flowchart LR
+  ADM[Administrador] --> CU1((Iniciar sesión))
+  ADM --> CU2((Gestionar catálogos y mesas))
+  ADM --> CU12((Consultar reportes - solo backend))
+  CAJ[Cajero] --> CU7((Crear menú))
+  CAJ --> CU8((Registrar pedido y venta))
+  COC[Cocinero] --> CU10((Actualizar preparación))
+  MES[Mesero] --> CU11((Entregar pedido))
+  CLI[Cliente] --> CU13((Consultar menú))
+  CLI --> CU14((Usar Gemini))

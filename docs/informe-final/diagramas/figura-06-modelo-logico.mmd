@@ -1,0 +1,11 @@
+erDiagram
+  ROL ||--o{ USUARIO : asigna
+  USUARIO ||--o{ PEDIDO : registra
+  MESA o|--o{ PEDIDO : recibe
+  PEDIDO ||--|{ DETALLEPEDIDO : contiene
+  PEDIDO ||--o| VENTA : origina
+  CATEGORIA ||--o{ PLATO : clasifica
+  MENU_DIA ||--o{ DETALLEMENU : contiene
+  PLATO ||--o{ DETALLEMENU : integra
+  COMBO ||--|{ DETALLECOMBO : contiene
+  PLATO ||--o{ DETALLECOMBO : integra
