@@ -1,0 +1,51 @@
+.rs-container {
+  width: min(100%, var(--rs-content-max));
+  margin-inline: auto;
+  padding-inline: var(--rs-space-4);
+}
+
+.rs-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rs-space-4);
+}
+
+.rs-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--rs-space-3);
+}
+
+.rs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--rs-space-4);
+}
+
+.rs-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--rs-space-4);
+  max-width: var(--rs-form-max);
+}
+
+.rs-width-full {
+  width: 100%;
+}
+
+.rs-text-secondary {
+  color: var(--rs-color-text-secondary);
+}
+
+.rs-text-right {
+  text-align: right;
+}
+
+.rs-no-wrap {
+  white-space: nowrap;
+}
+
+.rs-scroll-lock {
+  overflow: hidden;
+}

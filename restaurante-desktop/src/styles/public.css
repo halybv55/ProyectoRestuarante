@@ -1,0 +1,355 @@
+.rs-public-shell,
+.rs-login-page {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100dvh;
+  background: var(--rs-color-background);
+}
+
+.rs-public-shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.rs-public-brand {
+  display: flex;
+  width: min(100%, var(--rs-content-max));
+  align-items: center;
+  gap: var(--rs-space-3);
+  margin-inline: auto;
+  padding:
+    calc(var(--rs-space-5) + env(safe-area-inset-top))
+    var(--rs-space-4)
+    var(--rs-space-5);
+}
+
+.rs-public-brand__mark,
+.rs-login-heading__mark {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: var(--rs-radius-md);
+  background: var(--rs-color-primary-accent);
+  color: var(--rs-color-surface);
+}
+
+.rs-public-brand__mark {
+  width: var(--rs-touch-target);
+  height: var(--rs-touch-target);
+  font-size: var(--rs-font-size-xl);
+}
+
+.rs-public-brand__name {
+  font-size: var(--rs-font-size-lg);
+  font-weight: var(--rs-font-weight-bold);
+}
+
+.rs-role-selection {
+  display: flex;
+  width: min(100%, 76rem);
+  min-width: 0;
+  max-width: 100%;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--rs-space-8);
+  margin-inline: auto;
+  padding: var(--rs-space-8) var(--rs-space-4) var(--rs-space-12);
+}
+
+.rs-role-selection__intro {
+  max-width: 44rem;
+}
+
+.rs-role-selection__eyebrow {
+  display: block;
+  margin-bottom: var(--rs-space-2);
+  color: var(--rs-color-primary-dark);
+  font-size: var(--rs-font-size-sm);
+  font-weight: var(--rs-font-weight-bold);
+}
+
+.rs-role-selection h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: var(--rs-line-height-tight);
+  overflow-wrap: anywhere;
+}
+
+.rs-role-selection__intro p {
+  max-width: 38rem;
+  margin: var(--rs-space-3) 0 0;
+  color: var(--rs-color-text-secondary);
+  font-size: var(--rs-font-size-lg);
+}
+
+.rs-role-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--rs-space-4);
+}
+
+.rs-role-card {
+  --rs-role-accent: var(--rs-color-primary);
+  --rs-role-soft: var(--rs-color-primary-soft);
+
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 10.5rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--rs-space-4);
+  padding: var(--rs-space-5);
+  overflow: hidden;
+  border: var(--rs-border-width) solid var(--rs-color-border);
+  border-radius: var(--rs-radius-md);
+  background: var(--rs-color-surface);
+  color: var(--rs-color-text);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--rs-shadow-sm);
+  transition:
+    border-color var(--rs-transition-base),
+    box-shadow var(--rs-transition-base),
+    transform var(--rs-transition-base);
+}
+
+.rs-role-card:hover {
+  border-color: var(--rs-role-accent);
+  box-shadow: var(--rs-shadow-md);
+  transform: translateY(-2px);
+}
+
+.rs-role-card:active {
+  transform: translateY(0);
+}
+
+.rs-role-card--admin {
+  --rs-role-accent: var(--rs-color-info);
+  --rs-role-soft: var(--rs-color-info-soft);
+}
+
+.rs-role-card--kitchen {
+  --rs-role-accent: var(--rs-color-success);
+  --rs-role-soft: var(--rs-color-success-soft);
+}
+
+.rs-role-card--service {
+  --rs-role-accent: var(--rs-color-warning);
+  --rs-role-soft: var(--rs-color-warning-soft);
+}
+
+.rs-role-card__icon {
+  display: inline-grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: var(--rs-radius-md);
+  background: var(--rs-role-soft);
+  color: var(--rs-role-accent);
+  font-size: 1.75rem;
+}
+
+.rs-role-card__content {
+  display: grid;
+  min-width: 0;
+  gap: var(--rs-space-1);
+}
+
+.rs-role-card__content strong {
+  font-size: var(--rs-font-size-lg);
+  line-height: var(--rs-line-height-tight);
+}
+
+.rs-role-card__content small {
+  color: var(--rs-color-text-secondary);
+  font-size: var(--rs-font-size-sm);
+  line-height: var(--rs-line-height-normal);
+}
+
+.rs-role-card__arrow {
+  flex: 0 0 auto;
+  color: var(--rs-role-accent);
+  font-size: var(--rs-font-size-xl);
+}
+
+.rs-public-footer {
+  width: min(100%, var(--rs-content-max));
+  margin-inline: auto;
+  padding:
+    var(--rs-space-5)
+    var(--rs-space-4)
+    calc(var(--rs-space-5) + env(safe-area-inset-bottom));
+  border-top: var(--rs-border-width) solid var(--rs-color-border);
+  color: var(--rs-color-text-secondary);
+  text-align: center;
+}
+
+.rs-login-page {
+  display: grid;
+  place-items: center;
+  padding:
+    calc(var(--rs-space-4) + env(safe-area-inset-top))
+    var(--rs-space-4)
+    calc(var(--rs-space-4) + env(safe-area-inset-bottom));
+}
+
+.rs-login-panel {
+  display: grid;
+  width: min(100%, 30rem);
+  min-width: 0;
+  max-width: 100%;
+  gap: var(--rs-space-6);
+  padding: var(--rs-space-5);
+  border: var(--rs-border-width) solid var(--rs-color-border);
+  border-radius: var(--rs-radius-md);
+  background: var(--rs-color-surface);
+  box-shadow: var(--rs-shadow-md);
+}
+
+.rs-login-back {
+  display: inline-flex;
+  width: fit-content;
+  min-height: var(--rs-touch-target);
+  align-items: center;
+  gap: var(--rs-space-2);
+  color: var(--rs-color-text-secondary);
+  font-size: var(--rs-font-size-sm);
+  font-weight: var(--rs-font-weight-semibold);
+  text-decoration: none;
+}
+
+.rs-login-back:hover {
+  color: var(--rs-color-primary-dark);
+}
+
+.rs-login-heading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: var(--rs-space-4);
+}
+
+.rs-login-heading__mark {
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.75rem;
+}
+
+.rs-login-heading__brand {
+  display: block;
+  margin-bottom: var(--rs-space-1);
+  color: var(--rs-color-text-secondary);
+  font-size: var(--rs-font-size-sm);
+  font-weight: var(--rs-font-weight-semibold);
+}
+
+.rs-login-heading h1 {
+  margin: 0;
+  font-size: var(--rs-font-size-2xl);
+  line-height: var(--rs-line-height-tight);
+}
+
+.rs-login-role {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--rs-space-3);
+  padding: var(--rs-space-3) var(--rs-space-4);
+  border-left: 3px solid var(--rs-color-primary);
+  border-radius: var(--rs-radius-sm);
+  background: var(--rs-color-primary-soft);
+}
+
+.rs-login-role span {
+  color: var(--rs-color-text-secondary);
+  font-size: var(--rs-font-size-sm);
+}
+
+.rs-login-role strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--rs-color-primary-dark);
+  text-align: right;
+}
+
+.rs-login-form {
+  display: grid;
+  gap: var(--rs-space-5);
+}
+
+.rs-login-help {
+  margin: 0;
+  color: var(--rs-color-text-secondary);
+  font-size: var(--rs-font-size-sm);
+  text-align: center;
+}
+
+@media (min-width: 40rem) {
+  .rs-role-selection h1 {
+    font-size: 3rem;
+  }
+
+  .rs-public-brand {
+    padding:
+      calc(var(--rs-space-6) + env(safe-area-inset-top))
+      var(--rs-space-6)
+      var(--rs-space-6);
+  }
+
+  .rs-role-selection {
+    padding-inline: var(--rs-space-6);
+  }
+
+  .rs-role-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rs-role-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: space-between;
+  }
+
+  .rs-role-card__icon {
+    grid-column: 1;
+  }
+
+  .rs-role-card__content {
+    grid-column: 1 / -1;
+  }
+
+  .rs-role-card__arrow {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .rs-login-page {
+    padding:
+      calc(var(--rs-space-8) + env(safe-area-inset-top))
+      var(--rs-space-8)
+      calc(var(--rs-space-8) + env(safe-area-inset-bottom));
+  }
+
+  .rs-login-panel {
+    padding: var(--rs-space-8);
+  }
+}
+
+@media (min-width: 64rem) {
+  .rs-role-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-role-card {
+    transition: none;
+  }
+
+  .rs-role-card:hover {
+    transform: none;
+  }
+}

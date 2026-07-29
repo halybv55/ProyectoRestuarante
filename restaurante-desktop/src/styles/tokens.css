@@ -1,0 +1,74 @@
+:root {
+  color-scheme: light;
+
+  --rs-color-background: #f5f7fa;
+  --rs-color-surface: #ffffff;
+  --rs-color-surface-muted: #f9fafb;
+  --rs-color-text: #17202a;
+  --rs-color-text-secondary: #667085;
+  --rs-color-border: #e4e7ec;
+  --rs-color-border-strong: #d0d5dd;
+  --rs-color-primary-accent: #c47a32;
+  --rs-color-primary: #9a5a20;
+  --rs-color-primary-dark: #7a4316;
+  --rs-color-primary-soft: #fff4e8;
+  --rs-color-success: #16835d;
+  --rs-color-success-soft: #eaf8f2;
+  --rs-color-warning: #d97706;
+  --rs-color-warning-soft: #fff7e6;
+  --rs-color-error: #c43d3d;
+  --rs-color-error-soft: #fff0f0;
+  --rs-color-info: #246bce;
+  --rs-color-info-soft: #edf5ff;
+  --rs-color-overlay: rgb(23 32 42 / 55%);
+  --rs-color-focus: rgb(36 107 206 / 70%);
+
+  --rs-font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --rs-font-size-xs: 0.75rem;
+  --rs-font-size-sm: 0.875rem;
+  --rs-font-size-md: 1rem;
+  --rs-font-size-lg: 1.125rem;
+  --rs-font-size-xl: 1.375rem;
+  --rs-font-size-2xl: 1.75rem;
+  --rs-line-height-tight: 1.25;
+  --rs-line-height-normal: 1.5;
+  --rs-font-weight-medium: 500;
+  --rs-font-weight-semibold: 600;
+  --rs-font-weight-bold: 700;
+
+  --rs-space-1: 0.25rem;
+  --rs-space-2: 0.5rem;
+  --rs-space-3: 0.75rem;
+  --rs-space-4: 1rem;
+  --rs-space-5: 1.25rem;
+  --rs-space-6: 1.5rem;
+  --rs-space-8: 2rem;
+  --rs-space-10: 2.5rem;
+  --rs-space-12: 3rem;
+
+  --rs-border-width: 1px;
+  --rs-radius-sm: 0.25rem;
+  --rs-radius-md: 0.5rem;
+  --rs-radius-lg: 0.75rem;
+  --rs-radius-round: 999px;
+  --rs-shadow-sm: 0 1px 2px rgb(16 24 40 / 6%);
+  --rs-shadow-md: 0 8px 24px rgb(16 24 40 / 12%);
+  --rs-shadow-modal: 0 24px 48px rgb(16 24 40 / 22%);
+
+  --rs-content-max: 90rem;
+  --rs-form-max: 48rem;
+  --rs-sidebar-width: 16rem;
+  --rs-navbar-height: 4rem;
+  --rs-mobile-nav-height: 4rem;
+  --rs-touch-target: 2.75rem;
+
+  --rs-z-dropdown: 1000;
+  --rs-z-sticky: 1020;
+  --rs-z-overlay: 1040;
+  --rs-z-drawer: 1045;
+  --rs-z-modal: 1050;
+  --rs-z-toast: 1080;
+
+  --rs-transition-fast: 120ms ease;
+  --rs-transition-base: 180ms ease;
+}
