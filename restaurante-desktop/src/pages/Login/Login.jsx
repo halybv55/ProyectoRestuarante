@@ -17,6 +17,7 @@ function Login() {
     const { rol } = useParams();
 
     const { iniciarSesion: guardarSesion } = useAuth();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -26,47 +27,59 @@ function Login() {
 
         try {
             const respuesta = await login(username, password);
-            console.log(respuesta.data);
+
             const usuario = respuesta.data.usuario;
             const token = respuesta.data.token;
-            console.log("Rol backend:", usuario.rol);
-            console.log("Rol seleccionado:", rol);
 
-            if (usuario.rol !== rol) {
+            console.log("Usuario:", usuario);
+            console.log("Rol backend:", usuario.rol);
+            console.log("Rol URL:", rol);
+
+            // Relación entre el nombre de la URL y el rol del backend
+            const equivalencias = {
+                Administrador: "Administrador",
+                Cajera: "Cajero",
+                Cocinera: "Cocinero",
+                Mesero: "Mesero",
+            };
+
+            // Validar que el usuario pertenezca al área
+            if (usuario.rol !== equivalencias[rol]) {
                 setErrorMessage("Este usuario no pertenece a esta área.");
-                alert("Este usuario no pertenece a esta área.");
                 return;
             }
 
+            // Guardar sesión
             guardarSesion(usuario, token);
 
+            // Redirección según el rol devuelto por el backend
             switch (usuario.rol) {
                 case "Administrador":
                     navigate("/admin");
                     break;
-                case "Cajera":
+
+                case "Cajero":
                     navigate("/caja");
                     break;
-                case "Cocinera":
+
+                case "Cocinero":
                     navigate("/cocina");
                     break;
+
                 case "Mesero":
                     navigate("/mesero");
                     break;
+
                 default:
                     setErrorMessage("Rol no válido.");
-                    alert("Rol no válido.");
                     break;
             }
         } catch (error) {
             console.error(error.response?.data || error);
+
             setErrorMessage(
                 error.response?.data?.message ||
-                    "Usuario o contraseña incorrectos.",
-            );
-            alert(
-                error.response?.data?.message ||
-                    "Usuario o contraseña incorrectos.",
+                    "Usuario o contraseña incorrectos."
             );
         }
     };
@@ -80,18 +93,26 @@ function Login() {
                 </Link>
 
                 <div className="rs-login-heading">
-                    <span className="rs-login-heading__mark" aria-hidden="true">
+                    <span
+                        className="rs-login-heading__mark"
+                        aria-hidden="true"
+                    >
                         <MdRestaurantMenu />
                     </span>
+
                     <div>
                         <span className="rs-login-heading__brand">
                             Restaurante ERP
                         </span>
+
                         <h1>Iniciar sesión</h1>
                     </div>
                 </div>
 
-                <div className="rs-login-role" aria-label={`Área seleccionada: ${rol}`}>
+                <div
+                    className="rs-login-role"
+                    aria-label={`Área seleccionada: ${rol}`}
+                >
                     <span>Área seleccionada</span>
                     <strong>{rol}</strong>
                 </div>
@@ -104,8 +125,8 @@ function Login() {
 
                 <form
                     className="rs-login-form"
-                    onSubmit={(event) => {
-                        event.preventDefault();
+                    onSubmit={(e) => {
+                        e.preventDefault();
                         iniciarSesion();
                     }}
                 >
